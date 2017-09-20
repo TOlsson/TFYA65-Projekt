@@ -1,3 +1,3 @@
 %% TFYA65 Test
 
-[string, fs] = audioread()
+[string, fs] = audioread(ljudfiler1st_String),
