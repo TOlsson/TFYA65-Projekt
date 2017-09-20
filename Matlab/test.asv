@@ -9,9 +9,7 @@ figure;
 
 %autocorrelation
 auto_E = xcorr(string);
-plot(auto_E)
-figure
-sz = size(auto_E);
-plot(auto_E(sz(1)/2-10:sz(1)/2+10));
+plot(auto_E(:10));
 
-%%
+p = findpeaks(auto_E);
+    
