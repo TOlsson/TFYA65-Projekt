@@ -14,4 +14,6 @@ play(recObj);
 myRecording = getaudiodata(recObj);
 
 % Plot the waveform.
-plot(myRecording);;
+plot(myRecording);
+
+
