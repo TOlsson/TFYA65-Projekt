@@ -20,24 +20,24 @@ switch refHz
         refHz = 82.4;
 end 
 
-%read audio file
-[string, fs] = audioread('ljudfiler\1st_String_E.mp3');
+% %read audio file
+[string, fs] = audioread('ljudfiler\6th_String_E.mp3');
 
-%live record audio file (fungerar! men inte med vår hårdkodade
-%autocorr-funktion)
+% %live record audio file (fungerar! men inte med vår hårdkodade
+% %autocorr-funktion)
 % fs = 44100;
 % recObj = audiorecorder(fs, 16, 2);
 % %Record your voice for 5 seconds.
 % recObj = audiorecorder;
 % disp('Start speaking.')
-% recordblocking(recObj, 2);
+% recordblocking(recObj, 3);
 % disp('End of Recording.');
 % %Store data in double-precision array.
-% myRecording = getaudiodata(recObj);
-% 
-% %plot sound
-% plot(myRecording);
-% figure
+% string = getaudiodata(recObj);
+
+%plot sound
+plot(string);
+figure
 
 %calculate frequency using autocorrelation
 Hz = autocorr(string, fs)
@@ -48,7 +48,7 @@ plot(t,ones(size(t))*refHz, '-g');
 hold on
 plot(t,ones(size(t))*Hz, '-r')
 xlim([0 10])
-ylim([refHz-200 refHz+200])
+ylim([refHz-500 refHz+500])
 
 
 

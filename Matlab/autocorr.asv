@@ -1,11 +1,10 @@
 function [Hz] = autocorr(sig, fs)
     
     %ta bort den superhöga delen från ljudet (filtrera??)
-    lpFilt = fdesign.lowpass('N, Fc', 10, 400, fs);
-    
+    lpFilt = designfilt('lowpassfir','PassbandFrequency',0.25, 'StopbandFrequency', 0.35,'PassbandRipple',0.5, 'StopbandAttenuation',65,'DesignMethod','kaiserwin');
     
     ftSig = fft(sig);
-    ftfilter = filter(lpFilt,ftSig);
+    ftfilter = ftSig.*(mask <= 0);
     rec0 = ifft(ftfilter);
     
     figure;
