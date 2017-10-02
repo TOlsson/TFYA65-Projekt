@@ -39,6 +39,15 @@ end
 plot(string);
 figure
 
+nf=1024; %number of point in DTFT
+Y = fft(string,nf);
+plot(abs(Y(1:nf/2+1)));
+figure
+h = fdesign.lowpass('Fp,Fst,Ap,Ast', 400, 500, 1, 60, fs);
+Hd = design(h, 'equiripple', 'MinOrder', 'any', 'StopbandShape', 'flat');
+filter(Hd, Y);
+
+
 %calculate frequency using autocorrelation
 Hz = autocorr(string, fs)
 

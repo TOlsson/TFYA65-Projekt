@@ -20,8 +20,8 @@ switch refHz
         refHz = 82.4;
 end 
 
-%read audio file
-[string, fs] = audioread('ljudfiler\4rd_String_G.mp3');
+% %read audio file
+%[string, fs] = audioread('ljudfiler\6th_String_E.mp3');
 
 % %live record audio file (fungerar! men inte med vår hårdkodade
 % %autocorr-funktion)
@@ -30,13 +30,20 @@ end
 % %Record your voice for 5 seconds.
 % recObj = audiorecorder;
 % disp('Start speaking.')
-% recordblocking(recObj, 4);
+% recordblocking(recObj, 3);
 % disp('End of Recording.');
 % %Store data in double-precision array.
 % string = getaudiodata(recObj);
 
 %plot sound
 plot(string);
+figure
+
+nf=1024; %number of point in DTFT
+Y = fft(string,nf);
+plot(abs(Y(1:nf/2+1)));
+h = fdesign.lowpass('fp, fst, ap, ast', 400, 500, 1, 60, fs);
+Hd = design(h, 'equiripple', 'MinOrder', '')
 figure
 
 %calculate frequency using autocorrelation

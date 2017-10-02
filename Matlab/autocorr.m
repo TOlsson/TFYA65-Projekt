@@ -1,16 +1,7 @@
 function [Hz] = autocorr(sig, fs)
     
     %ta bort den superhöga delen från ljudet (filtrera??)
-    lpFilt = fdesign.lowpass('N, Fc', 10, 400, fs);
-    
-    
-    ftSig = fft(sig);
-    ftfilter = filter(lpFilt,ftSig);
-    rec0 = ifft(ftfilter);
-    
-    figure;
-    plot(rec0);
-
+    %lpFilt = fdesign.lowpass('N, Fc', 10, 400, fs);
     
     [auto_E] = xcorr(sig);
     
