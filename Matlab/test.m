@@ -30,22 +30,23 @@ switch refHz
         mPH = 0.8;    %meanPeakHeight ?????????????????
 end 
 
-% %read audio file
-%[string, fs] = audioread('ljudfiler\6th_String_E.mp3');
+%read audio file
+[string, fs] = audioread('ljudfiler\2nd_String_B.mp3');
+mPH = 0.8;
 
-%live record audio file 
-fs = 8000;
-recObj = audiorecorder(fs, 16, 2);
-%Record your voice for 5 seconds.
-recObj = audiorecorder;
-disp('Recording')
-recordblocking(recObj, 3);
-disp('End of Recording');
-%Store data in double-precision array.
-string = getaudiodata(recObj);
-%plot sound
-plot(string)
-figure
+% %live record audio file 
+% fs = 8000;
+% recObj = audiorecorder(fs, 16, 2);
+% %Record your voice for 5 seconds.
+% recObj = audiorecorder;
+% disp('Recording')
+% recordblocking(recObj, 3);
+% disp('End of Recording');
+% %Store data in double-precision array.
+% string = getaudiodata(recObj);
+% %plot sound
+% plot(string)
+% figure
 
 % %fourier transform 
 % Fn = fs/2;                                                      % Nyquist Frequency
@@ -71,7 +72,7 @@ figure
 % figure
 
 %calculate frequency using autocorrelation
-Hz = autocorr(string, fs, mPH)
+Hz = autocorr(string, fs, mPH);
 
 %plot ref-frequency & recorded frequency
 t= 0:0.01:10;    
