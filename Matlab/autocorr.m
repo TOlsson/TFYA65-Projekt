@@ -1,26 +1,35 @@
-function [Hz] = autocorr(sig, fs)
+function [Hz] = autocorr(sig, fs, mPH)
     
     %ta bort den superhöga delen från ljudet (filtrera??)
-    %lpFilt = fdesign.lowpass('N, Fc', 10, 400, fs);
     
     [auto_E] = xcorr(sig);
     
+    %normalisera
     auto_E = (auto_E - min(auto_E))/(max(auto_E)-min(auto_E));
+    plot(auto_E)
+    figure
+    
+    %gör moving mean
     meanAuto = movmean(auto_E, 20);
+    %normalisera movingmean
     meanAuto = (meanAuto - min(meanAuto))/(max(meanAuto)-min(meanAuto));
+    plot(meanAuto)
+    figure
    
+    %visa mitten på autokorrelationen
     sz = size(auto_E);
-    centeredAuto = auto_E(sz(1)/2-600:sz(1)/2+600);
+    centeredAuto = auto_E(sz(1)/2-200:sz(1)/2+200);
     plot(centeredAuto)
     figure
     
+    %visa mitten av meanAutkorrelationen
     sz = size(meanAuto);
-    centeredMean = meanAuto(sz(1)/2-500:sz(1)/2+500);
+    centeredMean = meanAuto(sz(1)/2-50:sz(1)/2+50);
     plot(centeredMean)
     figure
 
-    [pks, peaklocs] = findpeaks(centeredAuto, 'MinPeakHeight', 0.8); %WE MUST FIX THIS BS
-     
+    %find peaks
+    [pks, peaklocs] = findpeaks(centeredAuto, 'MinPeakHeight', mPH); %WE MUST FIX THIS BS
     
     [maxpeak, maxpos] = max(pks);
 
