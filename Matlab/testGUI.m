@@ -1,3 +1,5 @@
+% KÖR genom att skriva run testGUI i command Window
+
 function testGUI
 handles.mainwindow = figure();
 
